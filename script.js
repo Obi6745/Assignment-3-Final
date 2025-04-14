@@ -20,3 +20,56 @@ cityInput.addEventListener('keypress', (e) => {
     }
 });
 
+//handle search part 
+
+async function handleSearch() {
+    const city = cityInput.value.trim();
+    if (!city) return; 
+
+    try {
+        //try and get current weather
+        const currentWeather = await getCurrentWeather(city);
+        updateForecast(forecastData);
+    } catch (error) {
+        alert('Error fetching weather data. Please try again.'); 
+        console.error('Error:', error); 
+    }
+
+}
+
+//fetch the weather 
+async function getCurrentWeather(city) {
+    const response = await fetch(
+        `${BASE_URL}/weather?q=${city}&units=metric&appid=${API_KEY}`
+
+    );
+    if (!response.ok) {
+        throw new Error ('Weather data not found');
+
+    }
+    return await response.json(); 
+}
+
+//get the 5 day forecast 
+
+async function getForecast(city) {
+    const response = await fetch(
+        `${BASE_URL}/forecast?q=${city}&units=metric&appid=${API_KEY}`
+    );
+    if (!response.ok) {
+        throw new Error ('FOrecast data not found');
+        return await response.json(); 
+    }
+}
+
+//update weather display 
+function updateCurrentWeather (data) {
+    cityName.textContent = `${data.name}, ${data.sys.country}`;
+    temperature.textContent = Math.round(data.main.temp);
+    description.textContent = data.weather[0].description;
+    humidity.textContent = data.main.humidity;
+    wind.textContent = Math.round(data.wind.speed * 3.6);
+
+}
+
+

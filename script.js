@@ -27,14 +27,17 @@ async function handleSearch() {
     if (!city) return; 
 
     try {
-        //try and get current weather
+        // Get current weather
         const currentWeather = await getCurrentWeather(city);
+        updateCurrentWeather(currentWeather);
+        
+        // Get forecast
+        const forecastData = await getForecast(city);
         updateForecast(forecastData);
     } catch (error) {
         alert('Error fetching weather data. Please try again.'); 
         console.error('Error:', error); 
     }
-
 }
 
 //fetch the weather 
@@ -57,9 +60,9 @@ async function getForecast(city) {
         `${BASE_URL}/forecast?q=${city}&units=metric&appid=${API_KEY}`
     );
     if (!response.ok) {
-        throw new Error ('FOrecast data not found');
-        return await response.json(); 
+        throw new Error('Forecast data not found');
     }
+    return await response.json();
 }
 
 //update weather display 

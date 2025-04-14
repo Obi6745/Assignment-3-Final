@@ -8,46 +8,41 @@
 </head>
 <body>
     <div class="container">
-        <header> 
+        <header>
             <h1>Weather Dashboard</h1>
             <div class="search-container">
-                <input type="text" id="cityInput" placeholder="Entercity name">
+                <input type="text" id="cityInput" placeholder="Enter city name">
                 <button id="searchBtn">Search</button>
             </div>
         </header>
-
-        <main> 
+        
+        <main>
             <div class="weather-card">
-                <h2 id="cityName">Enter a city name</h2>
-                <div class="weather-info"></div>
-                    <div class="temperature"></div>
-                        <span id="temperature">--</span>°C
-            </div>
-            <div class="Weather-description" id="description">--</div>
-            <div class="weather-details"></div>
-                <div>Humidity: <span id="humidity">--</span>%</div>
-                <div>Wind: <span id="wind">--</span> km/h</div>
-
-            
-                <div class="forecast-container">
-                    <h3>5-day Forecast</h3>
-                    <div id="forecast" class="forecast-grid"></div>
+                <div class="current-weather">
+                    <h2 id="cityName">Enter a city name</h2>
+                    <div class="weather-info">
+                        <div class="temperature">
+                            <span id="temperature">--</span>°C
+                        </div>
+                        <div class="weather-description" id="description">--</div>
+                        <div class="weather-details">
+                            <div>Humidity: <span id="humidity">--</span>%</div>
+                            <div>Wind: <span id="wind">--</span> km/h</div>
+                        </div>
+                    </div>
                 </div>
-
+            </div>
+            
+            <div class="forecast-container">
+                <h3>5-Day Forecast</h3>
+                <div id="forecast" class="forecast-grid"></div>
+            </div>
         </main>
 
         <footer>
-            <p>Data provided by <a href="https://openweathermap.org/api" target="_blank">OpenWeatherMap API </p>
+            <p>Data provided by <a href="https://openweathermap.org/api" target="_blank">OpenWeatherMap API</a></p>
         </footer>
     </div>
     <script src="script.js"></script>
-
-
-
-
-
-
-
-
-
 </body>
+</html> 

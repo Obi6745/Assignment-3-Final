@@ -72,4 +72,36 @@ function updateCurrentWeather (data) {
 
 }
 
+//update forecast display 
+function updateForecast(data) {
+    forecast.innerHTML = '';
 
+    //grouping forecast data by day 
+    const dailyForecasts = data.list.reduce((acc, item) => {
+        const date = new Date(item.dt *1000).toLocaleDateString();
+        if (!acc[date]) {
+            acc[date] = item;
+        }
+        return acc;
+    }, {});
+
+    //forecast cards for each day 
+
+    Object.values(dailyForecasts).forEach(day => {
+        const date = new Date(day.dt *1000); 
+        const dayName = date.toLocaleTimeString('en-US', {weekday: 'short'});
+
+        const forecastCard = document.createElement('div');
+        forecastCard.className = 'forecast-day'; 
+        forecastCard.innerHTML =  `
+        <h4>${dayName}</h4>
+        <div class="temperature">${Math.round(day.main.temp)}°C</div>
+        <div class="weather-description">${day.weather[0].description}</div>
+    `;
+    
+    forecast.appendChild(forecastCard);
+    })
+
+    
+
+}
